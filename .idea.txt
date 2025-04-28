@@ -1,0 +1,9 @@
+- server process SQL-like queries on the data
+- server responds with results
+
+- client sends SQL-like requests to server
+- client receives results from server
+
+- operations:
+	- insert data (updating weights in place)
+	- retrieve data (top k items)
