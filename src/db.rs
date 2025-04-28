@@ -76,7 +76,8 @@ pub fn get(id: u32, top_k: u32) -> Result<Vec<(u32, u32)>> {
 		edge_list = data::deserialize_edge_list(data)?;
 	}
 
-	edge_list.sort_by(|a, b| a.1.cmp(&b.1));
+	edge_list.sort_by(|a, b| b.1.cmp(&a.1));
+	println!("sorted = {:?}", edge_list);
 
 	let upper_bound = min(edge_list.len(), top_k as usize);
 
