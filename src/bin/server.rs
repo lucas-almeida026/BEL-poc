@@ -32,14 +32,14 @@ async fn handle_client(mut stream: TcpStream) {
 								}
 							}
 						}
-						let response = format!(":false,{result}");
+						let response = format!(":true,{result}");
 						if let Err(e) = stream.write_all(&response.as_bytes()).await {
 							eprintln!("Failed to write to client: {}", e);
 							break;
 						}
 					}
 					Err(e) => {
-						let response = format!(":true,{:?}", e);
+						let response = format!(":false,{:?}", e);
 						if let Err(e) = stream.write_all(&response.as_bytes()).await {
 							eprintln!("Failed to write to client: {}", e);
 							break;
