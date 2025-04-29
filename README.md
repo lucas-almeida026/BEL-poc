@@ -14,9 +14,11 @@ It can only encode co-occurrence of nodes, the primary example would be co-occur
 - run the server binary with `cargo run --bin server`
 - run the client binary with `cargo run --bin client`
 - write your query manually on the client stdin and press Enter to send
-- the server will respond with the result of the query or an error message
+- the server will respondto the query with either a result or an error
 
 ### Queries
-there exists only two queries that are very similar to linux commands:
+there exists only two queries that are very similar to command line programs:
 - `put <list-of-tuples>`: update the edge lists based on the provided tuples, the list must be in the format `(<node_id:u32>:<group_id:u32>)[,(<node_id:u32>:<group_id:u32>)...]` (e.g `put (179001:1),(18045:1),(288389:1),(179001:2),(288398:2),(1200007:2)`)
 - `get top <k:u32> from <node_id:u32>`: get top k nodes related to the provided node id (e.g `get top 5 from 179001`)
+
+Note: all the products from the same group_id (shopping cart) must be sent together, the program does not handle partially sent data. You can send multiple groups at once, and tuples can be placed in any order as long as each group is "complete", that is, all the items from the same group are present in the list
