@@ -58,19 +58,6 @@ async fn handle_client(mut stream: TcpStream) {
 #[tokio::main]
 async fn main() -> Result<()> {
 	db::init_repository()?;
-
-	let fake_entries = vec![
-		data::Entry::new(12, 5),
-		data::Entry::new(2, 5),
-		data::Entry::new(11, 5),
-		data::Entry::new(11, 5),
-		data::Entry::new(4, 5),
-		data::Entry::new(8, 5),
-		data::Entry::new(12, 6),
-		data::Entry::new(3, 6),
-		data::Entry::new(1, 6),
-		data::Entry::new(11, 6),
-	];
 	// println!("query: {:?}", query::parse_query("put (12:5),(2:5),(11:5),(11:5),(4:5),(8:5)"));
 
     let listener = TcpListener::bind("127.0.0.1:42069").await?;
