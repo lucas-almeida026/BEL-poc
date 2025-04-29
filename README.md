@@ -5,7 +5,7 @@ A toy project to learn about manipulation of binary files and co-occurrence.
 
 It is supposed to mimic a graph database, but it is hyper-simplified/specialized and can only store a single type of node with a single type of relationship, the "edge list", hence the name BEL (Binary Edge List).
 
-It can only encode co-occurrence of nodes, the primary example would be co-occurrence of products in a shopping cart. If you store the co-occurrence "factor" of all the products in the same shopping cart, you can later query the database to answer the question, "which are the top n products that are usually bought together with product X?".
+It can only encode co-occurrence of nodes, the primary example would be co-occurrence of products in a shopping cart. If you store the co-occurrence "factor" of all the products bought together (in the same shopping cart) for all the purchases, you can later query the database to answer the question, "which are the top n products that are usually bought together with product X?".
 
 ---
 
