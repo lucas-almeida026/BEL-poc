@@ -1,4 +1,4 @@
-use bel_poc::{data, db, query};
+use bel_poc::{db, query};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::{TcpListener, TcpStream};
 use anyhow::Result;
