@@ -15,8 +15,7 @@ async fn handle_client(mut stream: TcpStream) {
                 let q = String::from(String::from_utf8_lossy(&buffer[..n]));
 				match query::parse_query(&q) {
 					Ok(q) => {
-						// println!("q: {q:?}");
-						let mut result = String::from("null");
+						let result;
 						match q {
 							query::QueryKind::Get { id, top_k } => {
 								match db::get(id, top_k.unwrap_or(1)) {
@@ -33,14 +32,14 @@ async fn handle_client(mut stream: TcpStream) {
 							}
 						}
 						let response = format!(":true,{result}");
-						if let Err(e) = stream.write_all(&response.as_bytes()).await {
+						if let Err(e) = stream.write_all(response.as_bytes()).await {
 							eprintln!("Failed to write to client: {}", e);
 							break;
 						}
 					}
 					Err(e) => {
 						let response = format!(":false,{:?}", e);
-						if let Err(e) = stream.write_all(&response.as_bytes()).await {
+						if let Err(e) = stream.write_all(response.as_bytes()).await {
 							eprintln!("Failed to write to client: {}", e);
 							break;
 						}

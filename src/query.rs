@@ -32,23 +32,21 @@ pub fn parse_query(query: &str) -> Result<QueryKind, QueryError> {
             return Err(QueryError::InvalidGetQuery); //"[Invalid query](get) expecting: get top <k> from <id>"
         }
 
-        let mut top_k = 0;
-        let mut id = 0;
-
-        match words[2].parse::<u32>() {
-            Ok(n) => top_k = n,
+        let top_k = match words[2].parse::<u32>() {
+            Ok(n) => n,
             Err(_) => return Err(QueryError::InvalidGetQueryK), //"[Invalid query](get) expecting positive integer <k> at ...top <k>..."
-        }
+        };
+        
 
-        match words[4].parse::<u32>() {
-            Ok(n) => id = n,
+        let id = match words[4].parse::<u32>() {
+            Ok(n) => n,
             Err(_) => return Err(QueryError::InvalidGetQueryId),
-        }
+        };
 
-        return Ok(QueryKind::Get {
+        Ok(QueryKind::Get {
             id,
             top_k: if top_k == 0 { None } else { Some(top_k) },
-        });
+        })
     } else if words[0] == "put" {
         if words.len() != 2 {
             return Err(QueryError::InvalidPutQuery);
@@ -70,18 +68,15 @@ pub fn parse_query(query: &str) -> Result<QueryKind, QueryError> {
                 return Err(QueryError::InvalidPutQueryList);
             }
 
-            let mut id = 0;
-            let mut group = 0;
-
-            match parts[0].parse::<u32>() {
-                Ok(n) => id = n,
+            let id = match parts[0].parse::<u32>() {
+                Ok(n) => n,
                 Err(_) => return Err(QueryError::InvalidPutQueryList),
-            }
+            };
 
-            match parts[1].parse::<u32>() {
-                Ok(n) => group = n,
+            let group = match parts[1].parse::<u32>() {
+                Ok(n) => n,
                 Err(_) => return Err(QueryError::InvalidPutQueryList),
-            }
+            };
 
             entries.push(Entry::new(id, group));
         }

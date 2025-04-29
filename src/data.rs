@@ -21,10 +21,10 @@ pub fn group_entries(entries: &Vec<Entry>) -> HashMap<u32, Vec<&Entry>> {
             .and_modify(|v: &mut Vec<&Entry>| v.push(entry))
             .or_insert(vec![entry]);
     }
-    return map;
+    map
 }
 
-pub fn build_relationship_map(entries: &Vec<&Entry>) -> HashMap<u32, HashMap<u32, u32>> {
+pub fn build_relationship_map(entries: &[&Entry]) -> HashMap<u32, HashMap<u32, u32>> {
     let mut map = HashMap::new();
     for i in 0..entries.len() {
         for j in (i + 1)..entries.len() {
